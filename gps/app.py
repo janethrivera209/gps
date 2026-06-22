@@ -1,6 +1,5 @@
 from flask import Flask
-
-from configuracion import Configuracion
+from gps.configuracion import Configuracion
 from routes import registrar_rutas
 
 
