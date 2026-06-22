@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 DIRECTORIO_BASE = Path(__file__).resolve().parent
@@ -6,7 +7,7 @@ DIRECTORIO_BASE = Path(__file__).resolve().parent
 class Configuracion:
     """Configuración central del proyecto."""
 
-    CLAVE_API_GOOGLE = "AIzaSyBI7-JK1Ll0OQGwG7n0tTdkQAYRDN4f094"
+    CLAVE_API_GOOGLE = os.getenv("CLAVE_API_GOOGLE", "AIzaSyBI7-JK1Ll0OQGwG7n0tTdkQAYRDN4f094")
 
     # Vehículo por defecto
     TIPO_VEHICULO_PREDETERMINADO = "CAR"
@@ -27,8 +28,8 @@ class Configuracion:
     TIEMPO_ESPERA_GOOGLE_SEGUNDOS = 35
 
     SERVIDOR = "0.0.0.0"
-    PUERTO = 5000
-    DEPURACION = True
+    PUERTO = int(os.getenv("PORT", 5000))
+    DEPURACION = os.getenv("FLASK_DEBUG", "False").lower() == "true"
 
     JSON_SORT_KEYS = False
     JSON_AS_ASCII = False
