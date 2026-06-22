@@ -521,20 +521,20 @@ def _casetas_estimadas(ruta):
 
 
 def encontrar_peajes(ruta, clave_api, tiempo_espera=35):
-    if not ruta.get("has_tolls"):
-        return [], "Sin peajes"
-
     polilinea = ruta.get("polyline", "")
     puntos_ruta = decodificar_polilinea(polilinea)
-    try:
-        lugares = _buscar_lugares_peaje(
-            puntos_ruta,
-            polilinea,
-            clave_api,
-            tiempo_espera,
-        )
-    except requests.RequestException:
-        lugares = []
+
+    lugares = []
+    if ruta.get("has_tolls"):
+        try:
+            lugares = _buscar_lugares_peaje(
+                puntos_ruta,
+                polilinea,
+                clave_api,
+                tiempo_espera,
+            )
+        except requests.RequestException:
+            lugares = []
 
     if lugares:
         return lugares, "Casetas verificadas sobre la ruta"
@@ -542,4 +542,6 @@ def encontrar_peajes(ruta, clave_api, tiempo_espera=35):
     # El respaldo se forma con los pasos de la ruta elegida, no con lugares
     # cercanos. Por eso los marcadores permanecen encima del recorrido.
     estimadas = _casetas_estimadas(ruta)
-    return estimadas, "Puntos de peaje de la ruta"
+    if estimadas:
+        return estimadas, "Puntos de peaje de la ruta"
+    return [], "Sin peajes"
