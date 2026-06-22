@@ -361,12 +361,32 @@ input::placeholder{
     padding:12px;
 }
 
+.result-block-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+}
+
 .result-block h3{
-    margin:0 0 12px;
+    margin:0;
     font-size:1rem;
     letter-spacing:.02em;
     text-transform:uppercase;
     color:#e2e8f0;
+}
+
+.warning-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:#dc2626;
+    color:white;
+    font-size:.8rem;
+    text-transform:uppercase;
 }
 
 .toll-item{

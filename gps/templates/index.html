@@ -14,16 +14,18 @@
     <button id="botonAbrirPanel" class="floating-menu hidden" type="button" aria-label="Abrir panel">☰</button>
 
     <!-- BARRA SUPERIOR -->
-    <div id="barraBusqueda" class="barra-superior">
+    <div id="panelControl" class="barra-superior">
 
         <div class="campo-ruta">
             <span class="point point-a">A</span>
-            <input id="entradaOrigen" type="text" placeholder="Origen">
+            <input id="entradaOrigen" type="text" autocomplete="off" placeholder="Origen">
+            <button id="botonLimpiarOrigen" class="clear-button" type="button" aria-label="Limpiar origen">×</button>
         </div>
 
         <div class="campo-ruta">
             <span class="point point-b">B</span>
-            <input id="entradaDestino" type="text" placeholder="Destino">
+            <input id="entradaDestino" type="text" autocomplete="off" placeholder="Destino">
+            <button id="botonLimpiarDestino" class="clear-button" type="button" aria-label="Limpiar destino">×</button>
         </div>
 
         <select id="selectorVehiculo">
@@ -43,6 +45,8 @@
         <button id="botonCalcular" class="primary-button" type="button">
             Calcular
         </button>
+
+        <button id="botonCerrarPanel" class="icon-button" type="button" aria-label="Cerrar panel">✕</button>
 
     </div>
 
@@ -97,7 +101,10 @@
         </div>
 
         <div id="resultadoZonasRojas" class="result-block hidden">
-            <h3>Zonas rojas</h3>
+            <div class="result-block-header">
+                <h3>Zonas rojas</h3>
+                <span id="insigniaAdvertenciaZona" class="warning-badge hidden">¡Atención!</span>
+            </div>
             <ul id="listaZonasRojas"></ul>
         </div>
 
