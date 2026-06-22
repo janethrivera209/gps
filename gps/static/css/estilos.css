@@ -416,96 +416,150 @@ input::placeholder{
         grid-template-columns:1fr;
     }
 }
-/* ===================================== */
-/* NUEVO DISEÑO RUTAS SEGURAS */
-/* ===================================== */
+/* ==========================
+   NUEVO LAYOUT TIPO GPS
+========================== */
 
-body{
-    background:#000;
-}
+/* ==========================
+   BARRA SUPERIOR
+========================== */
 
-/* PANEL LATERAL */
-
-.panel-lateral{
+.barra-superior{
     position:fixed;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
 
-    top:0;
-    right:0;
-    left:auto;
+    width:95%;
+    max-width:1300px;
 
-    width:420px;
-    height:100vh;
+    background:#0f172a;
 
-    max-height:100vh;
+    border:1px solid #1e293b;
 
-    overflow-y:auto;
+    border-radius:18px;
 
-    background:#111827;
+    padding:15px;
 
-    border-left:1px solid #1f2937;
+    display:grid;
+    grid-template-columns:
+        1.5fr
+        1.5fr
+        180px
+        140px
+        160px;
 
-    border-radius:0;
+    gap:12px;
 
-    padding:24px;
+    z-index:1000;
 
-    box-shadow:-10px 0 30px rgba(0,0,0,.4);
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
 }
 
-/* HEADER */
+/* ==========================
+   CAMPOS ORIGEN Y DESTINO
+========================== */
 
-.panel-header{
-    padding-bottom:20px;
-    border-bottom:1px solid #1f2937;
+.campo-ruta{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    background:#1e293b;
+
+    border:1px solid #334155;
+
+    border-radius:12px;
+
+    padding:8px 12px;
 }
 
-.panel-header h1{
-    margin:0;
+.campo-ruta input{
+    width:100%;
+
+    border:none;
+    outline:none;
+
+    background:transparent;
+
+    color:#ffffff;
+
+    font-size:14px;
+}
+
+.campo-ruta input::placeholder{
+    color:#94a3b8;
+}
+
+/* ==========================
+   SELECT VEHICULO
+========================== */
+
+#selectorVehiculo{
+    background:#1e293b;
+
     color:white;
-    font-size:1.6rem;
-    font-weight:700;
+
+    border:1px solid #334155;
+
+    border-radius:12px;
+
+    padding:10px;
 }
 
-.eyebrow{
-    display:none;
+/* ==========================
+   INPUT RENDIMIENTO
+========================== */
+
+#entradaRendimiento{
+    background:#1e293b;
+
+    color:white;
+
+    border:1px solid #334155;
+
+    border-radius:12px;
+
+    padding:10px;
 }
 
-/* LABELS */
+/* ==========================
+   BOTON CALCULAR
+========================== */
 
-label{
-    color:#d1d5db;
-    font-size:.85rem;
+#botonCalcular{
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    border-radius:12px;
+
     font-weight:600;
 }
 
-/* INPUTS */
-
-.input-row{
-    background:#1f2937;
-    border:none;
-    border-radius:12px;
+#botonCalcular:hover{
+    background:#1d4ed8;
 }
 
-input,
-select,
-textarea{
-    background:#1f2937;
+/* ==========================
+   PUNTOS A Y B
+========================== */
+
+.point{
+    width:28px;
+    height:28px;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
     color:white;
-    border:1px solid #374151;
-    border-radius:10px;
+    font-weight:bold;
 }
-
-input::placeholder{
-    color:#9ca3af;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:#3b82f6;
-    box-shadow:none;
-}
-
-/* ICONOS A Y B */
 
 .point-a{
     background:#2563eb;
@@ -515,161 +569,53 @@ textarea:focus{
     background:#dc2626;
 }
 
-/* BOTONES */
+/* ==========================
+   PANEL RESULTADOS
+========================== */
 
-.button-row{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:10px;
+.panel-inferior{
+    position:fixed;
+
+    left:50%;
+    bottom:20px;
+
+    transform:translateX(-50%);
+
+    width:95%;
+    max-width:1300px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    z-index:1000;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+
+    max-height:300px;
+
+    overflow:auto;
 }
 
-.primary-button{
-    min-height:50px;
+/* ==========================
+   RESPONSIVE
+========================== */
 
-    background:#2563eb;
+@media(max-width:900px){
 
-    border:none;
-
-    border-radius:12px;
-
-    color:white;
-
-    font-weight:600;
-}
-
-.primary-button:hover{
-    background:#1d4ed8;
-}
-
-.secondary-button{
-    min-height:50px;
-
-    background:#1f2937;
-
-    border:1px solid #374151;
-
-    color:white;
-
-    border-radius:12px;
-}
-
-.danger-light-button{
-    background:#7f1d1d;
-    color:white;
-    border:none;
-    border-radius:12px;
-}
-
-.zones-toolbar{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:10px;
-}
-
-/* RESULTADOS */
-
-.results{
-    margin-top:25px;
-    border-top:1px solid #1f2937;
-    padding-top:20px;
-}
-
-.results-title h2{
-    color:white;
-}
-
-/* TARJETAS */
-
-.metric-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:12px;
-}
-
-.metric{
-    background:#1f2937;
-
-    border:none;
-
-    border-radius:12px;
-
-    padding:14px;
-}
-
-.metric span{
-    color:#9ca3af;
-    font-size:.75rem;
-}
-
-.metric strong{
-    color:white;
-    font-size:1.1rem;
-}
-
-.metric.total{
-    background:#2563eb;
-}
-
-/* BLOQUES */
-
-.result-block{
-    background:#1f2937;
-
-    border:none;
-
-    border-radius:12px;
-
-    margin-top:15px;
-}
-
-/* MENSAJES */
-
-.message{
-    border-radius:12px;
-}
-
-.message.success{
-    background:#14532d;
-}
-
-.message.error{
-    background:#7f1d1d;
-}
-
-/* BOTONES PEQUEÑOS */
-
-.icon-button{
-    background:#1f2937;
-    color:white;
-}
-
-.clear-button{
-    color:#9ca3af;
-}
-
-/* OCULTAR TEXTO INNECESARIO */
-
-.map-help{
-    display:none;
-}
-
-/* MAPA */
-
-#mapa{
-    width:100vw;
-    height:100vh;
-}
-
-/* MÓVIL */
-
-@media(max-width:768px){
-
-    .panel-lateral{
-        width:100%;
+    .barra-superior{
+        grid-template-columns:1fr;
     }
 
-    .metric-grid{
-        grid-template-columns:1fr;
+    .panel-inferior{
+        width:100%;
+        left:0;
+        bottom:0;
+        transform:none;
+
+        border-radius:20px 20px 0 0;
     }
 
 }

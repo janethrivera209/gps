@@ -150,10 +150,17 @@ def _resumen_peajes(ruta):
 
 
 def _valores_vehiculo(tipo_vehiculo):
-    solicitado = str(tipo_vehiculo or "GASOLINE").strip().upper()
-    if solicitado not in {"GASOLINE", "TRUCK"}:
-        raise ErrorGoogleMaps("El tipo de vehículo debe ser GASOLINE o TRUCK.")
-    return solicitado, "DIESEL" if solicitado == "TRUCK" else "GASOLINE"
+    solicitado = str(tipo_vehiculo or "CAR").strip().upper()
+
+    if solicitado not in {"CAR", "MOTO", "TRUCK"}:
+        raise ErrorGoogleMaps(
+            "El tipo de vehículo debe ser CAR, MOTORCYCLE o TRUCK."
+        )
+
+    if solicitado == "TRUCK":
+        return solicitado, "DIESEL"
+
+    return solicitado, "GASOLINE"
 
 
 def calcular_rutas_google(origen, destino, tipo_vehiculo, clave_api, tiempo_espera=35):
@@ -182,6 +189,7 @@ def calcular_rutas_google(origen, destino, tipo_vehiculo, clave_api, tiempo_espe
         "extraComputations": ["TOLLS"],
         "routeModifiers": {
             "avoidTolls": False,
+            "avoidFerries": True,
             "vehicleInfo": {"emissionType": tipo_emision},
         },
     }
@@ -245,13 +253,13 @@ def calcular_rutas_google(origen, destino, tipo_vehiculo, clave_api, tiempo_espe
     return rutas
 
 
-
 def calcular_viaje(
     origen,
     destino,
     tipo_vehiculo,
     rendimiento_km_l,
     precio_gasolina_mxn,
+    precio_diesel_mxn,
     clave_api,
     tiempo_espera,
     zonas,
@@ -280,7 +288,13 @@ def calcular_viaje(
 
     distancia_km = float(seleccionada.get("distance_km") or analisis_ruta["distance_km"])
     litros = distancia_km / rendimiento_km_l
-    costo_combustible = litros * precio_gasolina_mxn
+
+    if tipo_vehiculo == "TRUCK":
+        precio_combustible = precio_diesel_mxn
+    else:
+        precio_combustible = precio_gasolina_mxn
+
+    costo_combustible = litros * precio_combustible
     costo_peajes = float(seleccionada.get("toll_cost", 0) or 0)
 
     return {
@@ -313,7 +327,7 @@ def calcular_viaje(
         "vehicle_type": seleccionada["vehicle_type"],
         "emission_type": seleccionada["emission_type"],
         "efficiency_km_l": round(rendimiento_km_l, 2),
-        "gas_price_mxn": round(precio_gasolina_mxn, 2),
+        "fuel_price_mxn": round(precio_combustible, 2),
         "estimated_liters": round(litros, 2),
         "fuel_cost_mxn": round(costo_combustible, 2),
         "has_tolls": seleccionada["has_tolls"],

@@ -45,8 +45,8 @@ def calcular_ruta_api():
 
     if not origen or not destino:
         return respuesta_error("Debes indicar un origen y un destino.")
-    if tipo_vehiculo not in {"GASOLINE", "TRUCK"}:
-        return respuesta_error("El tipo de vehículo debe ser GASOLINE o TRUCK.")
+    if tipo_vehiculo not in {"CAR", "MOTO", "TRUCK"}:
+        return respuesta_error("Tipo de vehículo no válido.")
     if rendimiento <= 0 or rendimiento > 100:
         return respuesta_error("El rendimiento debe estar entre 0 y 100 km/l.")
 
@@ -57,10 +57,11 @@ def calcular_ruta_api():
             tipo_vehiculo=tipo_vehiculo,
             rendimiento_km_l=rendimiento,
             precio_gasolina_mxn=current_app.config["PRECIO_GASOLINA_MXN"],
+            precio_diesel_mxn=current_app.config["PRECIO_DIESEL_MXN"],
             clave_api=current_app.config["CLAVE_API_GOOGLE"],
             tiempo_espera=current_app.config["TIEMPO_ESPERA_GOOGLE_SEGUNDOS"],
             zonas=listar_zonas(current_app.config["ARCHIVO_ZONAS"]),
-        )
+)
         return jsonify({"ok": True, "data": resultado})
     except ErrorGoogleMaps as error:
         return respuesta_error(str(error), 400)
