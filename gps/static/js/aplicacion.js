@@ -154,14 +154,18 @@ function mostrarPeajes(datos) {
     const contenedor = porId("listaPeajes");
     const peajes = Array.isArray(datos.tolls) ? datos.tolls : [];
 
-    if (!datos.has_tolls) {
-        contenedor.innerHTML = '<p class="small-text">La ruta seleccionada no reporta peajes.</p>';
-        return;
-    }
-
     const advertencias = (datos.toll_warnings || [])
         .map((texto) => `<p class="small-text">${escaparHtml(texto)}</p>`)
         .join("");
+
+    if (!peajes.length) {
+        if (!datos.has_tolls) {
+            contenedor.innerHTML = '<p class="small-text">La ruta seleccionada no reporta peajes.</p>';
+        } else {
+            contenedor.innerHTML = '<p class="small-text">Se detectaron peajes, pero no fue posible identificar cada caseta.</p>' + advertencias;
+        }
+        return;
+    }
 
     const elementos = peajes.map((peaje) => {
         const detalle = peaje.address || peaje.instruction || "";
@@ -172,8 +176,7 @@ function mostrarPeajes(datos) {
             </article>`;
     }).join("");
 
-    const mensajeSinCasetas = '<p class="small-text">Se detectaron peajes, pero no fue posible identificar cada caseta.</p>';
-    contenedor.innerHTML = `${elementos || mensajeSinCasetas}${advertencias}`;
+    contenedor.innerHTML = `${elementos}${advertencias}`;
 }
 
 function limpiarOrigen() {
