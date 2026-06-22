@@ -18,12 +18,12 @@ def crear_aplicacion(configuracion_prueba=None):
     return aplicacion
 
 
-aplicacion = crear_aplicacion()
+app = crear_aplicacion()
 
 
 if __name__ == "__main__":
-    aplicacion.run(
-        host=aplicacion.config["SERVIDOR"],
-        port=aplicacion.config["PUERTO"],
-        debug=aplicacion.config["DEPURACION"],
+    app.run(
+        host=app.config["SERVIDOR"],
+        port=app.config["PUERTO"],
+        debug=app.config["DEPURACION"],
     )
