@@ -4,8 +4,8 @@ import unicodedata
 
 import requests
 
-from services.motor_rutas import decodificar_polilinea
-from services.zonas import distancia_a_ruta_m
+from .motor_rutas import decodificar_polilinea
+from .zonas import distancia_a_ruta_m
 
 
 URL_RUTAS = "https://routes.googleapis.com/directions/v2:computeRoutes"

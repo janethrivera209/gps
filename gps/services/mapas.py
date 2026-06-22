@@ -1,8 +1,8 @@
 import requests
 
-from services.motor_rutas import seleccionar_mejor_ruta
-from services.casetas import encontrar_peajes
-from services.zonas import zonas_intersectan_ruta
+from .motor_rutas import seleccionar_mejor_ruta
+from .casetas import encontrar_peajes
+from .zonas import zonas_intersectan_ruta
 
 
 URL_GEOCODIFICACION = "https://maps.googleapis.com/maps/api/geocode/json"

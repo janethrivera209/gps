@@ -107,7 +107,7 @@ class _RespuestaExternaSimulada:
 
 
 def prueba_flujo_completo_filtra_caseta_fuera_de_ruta(cliente, parche_mono):
-    from services import mapas as modulo_mapas
+    from gps.services import mapas as modulo_mapas
 
     geocodificaciones = iter([
         _RespuestaExternaSimulada({

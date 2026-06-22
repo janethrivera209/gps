@@ -1,10 +1,10 @@
-from services.motor_rutas import (
+from gps.services.motor_rutas import (
     construir_grafo_cadena,
     decodificar_polilinea,
     aplicar_dijkstra,
     seleccionar_mejor_ruta,
 )
-from services.zonas import distancia_a_ruta_m, zonas_intersectan_ruta
+from gps.services.zonas import distancia_a_ruta_m, zonas_intersectan_ruta
 
 
 def prueba_decodificacion_polilinea_google():
